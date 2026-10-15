@@ -1,4 +1,4 @@
-### . Matrix Size and Entries
+### Exercise 1. Matrix Size and Entries
 
 Given
 
