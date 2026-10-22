@@ -1,13 +1,4 @@
 
-**Transformation paths (graph):**
-
-```mermaid
-flowchart LR
-	X["x = (1, 2)"] -->|"Scale S"| SX["Sx = (2, 2)"]
-	SX -->|"Rotate R"| RSX["RSx = (-2, 2)"]
-	X -->|"Rotate R"| RX["Rx = (-2, 1)"]
-	RX -->|"Scale S"| SRX["SRx = (-4, 1)"]
-```
 ### Exercise 9. Composing Transformations
 
 Let
