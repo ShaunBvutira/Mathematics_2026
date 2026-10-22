@@ -1,25 +1,152 @@
-### 1. Computations
+### Exercise 6. Transpose
 
-#### **Transposes $A^T$ and $B^T$**
-To find the transpose of a matrix, convert its rows into columns:
-
-$$
-A^T = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}
-$$
+For
 
 $$
-B^T = \begin{pmatrix} 1 & 2 & -1 \\ 0 & 1 & 3 \end{pmatrix}
+A=
+\begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+\end{pmatrix},
+\quad
+B=
+\begin{pmatrix}
+1 & 0 \\
+2 & 1 \\
+-1 & 3 \\
+\end{pmatrix}
 $$
+
+compute $A^\mathrm{T}$, $B^\mathrm{T}$, and $AB$. Then verify in this example that $(AB)^\mathrm{T} = B^\mathrm{T} A^\mathrm{T}$.
 
 ---
 
-#### **Product $AB$**
+### Solution
+
+#### Step 1: Compute $A^\mathrm{T}$
+
+The rows of $A$ ($2 \times 3$) become the columns of $A^\mathrm{T}$ ($3 \times 2$):
 
 $$
-AB = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 2 & 1 \\ -1 & 3 \end{pmatrix}
+A^\mathrm{T}=
+\begin{pmatrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6 \\
+\end{pmatrix}
 $$
 
-* **Row 1, Column 1:** $(1 \times 1) + (2 \times 2) + (3 \times -1) = 1 + 4 - 3 = 2$
-* **Row 1, Column 2:** $(1 \times 0) + (2 \times 1) + (3 \times 3) = 0 + 2 + 9 = 11$
-* **Row 2, Column 1:** $(4 \times 1) + (5 \times 2) + (6 \times -1) = 4 + 10 - 6 = 8$
-* **Row 2, Column 2:** $(4 \times 0) + (5 \times 1) + (6 \times 3) = 0 + 5 + 18 = 23$
+#### Step 2: Compute $B^\mathrm{T}$
+
+The rows of $B$ ($3 \times 2$) become the columns of $B^\mathrm{T}$ ($2 \times 3$):
+
+$$
+B^\mathrm{T}=
+\begin{pmatrix}
+1 & 2 & -1 \\
+0 & 1 & 3 \\
+\end{pmatrix}
+$$
+
+#### Step 3: Compute $AB$
+
+Multiply $A$ ($2 \times 3$) and $B$ ($3 \times 2$) to obtain a $2 \times 2$ matrix:
+
+$$
+AB =
+\begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+2 & 1 \\
+-1 & 3 \\
+\end{pmatrix}
+$$
+
+$$
+AB =
+\begin{pmatrix}
+(1)(1) + (2)(2) + (3)(-1) & (1)(0) + (2)(1) + (3)(3) \\
+(4)(1) + (5)(2) + (6)(-1) & (4)(0) + (5)(1) + (6)(3) \\
+\end{pmatrix}
+$$
+
+$$
+AB =
+\begin{pmatrix}
+1 + 4 - 3 & 0 + 2 + 9 \\
+4 + 10 - 6 & 0 + 5 + 18 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 11 \\
+8 & 23 \\
+\end{pmatrix}
+$$
+
+#### Step 4: Compute $(AB)^\mathrm{T}$
+
+Transpose the resulting matrix $AB$:
+
+$$
+(AB)^\mathrm{T} =
+\begin{pmatrix}
+2 & 8 \\
+11 & 23 \\
+\end{pmatrix}
+$$
+
+#### Step 5: Compute $B^\mathrm{T} A^\mathrm{T}$
+
+Multiply $B^\mathrm{T}$ ($2 \times 3$) and $A^\mathrm{T}$ ($3 \times 2$):
+
+$$
+B^\mathrm{T} A^\mathrm{T} =
+\begin{pmatrix}
+1 & 2 & -1 \\
+0 & 1 & 3 \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6 \\
+\end{pmatrix}
+$$
+
+$$
+B^\mathrm{T} A^\mathrm{T} =
+\begin{pmatrix}
+(1)(1) + (2)(2) + (-1)(3) & (1)(4) + (2)(5) + (-1)(6) \\
+(0)(1) + (1)(2) + (3)(3) & (0)(4) + (1)(5) + (3)(6) \\
+\end{pmatrix}
+$$
+
+$$
+B^\mathrm{T} A^\mathrm{T} =
+\begin{pmatrix}
+1 + 4 - 3 & 4 + 10 - 6 \\
+0 + 2 + 9 & 0 + 5 + 18 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 8 \\
+11 & 23 \\
+\end{pmatrix}
+$$
+
+#### Step 6: Verification
+
+Comparing $(AB)^\mathrm{T}$ and $B^\mathrm{T} A^\mathrm{T}$:
+
+$$
+(AB)^\mathrm{T} =
+\begin{pmatrix}
+2 & 8 \\
+11 & 23 \\
+\end{pmatrix}
+= B^\mathrm{T} A^\mathrm{T}
+$$
+
+The identity $(AB)^\mathrm{T} = B^\mathrm{T} A^\mathrm{T}$ is verified.
