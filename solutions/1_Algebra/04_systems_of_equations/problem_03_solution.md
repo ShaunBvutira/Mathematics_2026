@@ -1,82 +1,71 @@
-### Exercise 3. When Can Matrices Be Multiplied?
+### Exercise 3. Inconsistent System
 
-The matrix sizes are
+Solve or show that the system is inconsistent:
 
 $$
-A_{2 \times 3}, \quad B_{3 \times 4}, \quad C_{4 \times 2}, \quad D_{2 \times 2}.
+\begin{cases}
+x + 2y = 3, \\
+2x + 4y = 7.
+\end{cases}
 $$
 
-For the products $AB$, $BA$, $BC$, $CB$, $AC$, $CA$, $AD$, $DA$, determine whether they are defined. If so, state the size of the result. Justify each decision using the dimension compatibility condition.
+Show how the contradiction appears in the matrix after elimination and interpret it in terms of equations.
 
 ---
 
 ### Solution
 
-#### Step 1. State the dimension compatibility condition for matrix multiplication
+#### Step 1. Form the augmented matrix $[A \mid b]$
 
-Two matrices $X$ and $Y$ can be multiplied to form the product $XY$ **if and only if** the number of columns in $X$ (the inner dimension of the first matrix) equals the number of rows in $Y$ (the inner dimension of the second matrix).
-
-If matrix $X$ has size $m \times k$ and matrix $Y$ has size $k \times n$:
+Write the linear system in augmented matrix form:
 
 $$
-X_{m \times k} \cdot Y_{k \times n} = (XY)_{m \times n}
+[A \mid b] = 
+\begin{pmatrix}
+1 & 2 & \mid & 3 \\
+2 & 4 & \mid & 7 \\
+\end{pmatrix}
 $$
-
-The resulting matrix $XY$ will have size $m \times n$ ( outer dimensions ). If the inner dimensions do not match ($k \neq k'$), the product is **undefined**.
 
 ---
 
-#### Step 2. Analyze each product
+#### Step 2. Perform elimination
 
-1. **Product $AB$:**
-   - Inner dimensions: $A_{2 \times \mathbf{3}}$ and $B_{\mathbf{3} \times 4}$.
-   - Since $3 = 3$, the product is **defined**.
-   - **Size of $AB$:** $2 \times 4$.
+Eliminate the variable $x$ from the second row using $R_1$.
 
-2. **Product $BA$:**
-   - Inner dimensions: $B_{3 \times \mathbf{4}}$ and $A_{\mathbf{2} \times 3}$.
-   - Since $4 \neq 2$, the product is **undefined**.
+Perform $R_2 \leftarrow R_2 - 2 R_1$:
 
-3. **Product $BC$:**
-   - Inner dimensions: $B_{3 \times \mathbf{4}}$ and $C_{\mathbf{4} \times 2}$.
-   - Since $4 = 4$, the product is **defined**.
-   - **Size of $BC$:** $3 \times 2$.
+- Row 2 calculation: $(2 - 2(1), 4 - 2(2) \mid 7 - 2(3)) = (0, 0 \mid 1)$
 
-4. **Product $CB$:**
-   - Inner dimensions: $C_{4 \times \mathbf{2}}$ and $B_{\mathbf{3} \times 4}$.
-   - Since $2 \neq 3$, the product is **undefined**.
+The augmented matrix becomes:
 
-5. **Product $AC$:**
-   - Inner dimensions: $A_{2 \times \mathbf{3}}$ and $C_{\mathbf{4} \times 2}$.
-   - Since $3 \neq 4$, the product is **undefined**.
-
-6. **Product $CA$:**
-   - Inner dimensions: $C_{4 \times \mathbf{2}}$ and $A_{\mathbf{2} \times 3}$.
-   - Since $2 = 2$, the product is **defined**.
-   - **Size of $CA$:** $4 \times 3$.
-
-7. **Product $AD$:**
-   - Inner dimensions: $A_{2 \times \mathbf{3}}$ and $D_{\mathbf{2} \times 2}$.
-   - Since $3 \neq 2$, the product is **undefined**.
-
-8. **Product $DA$:**
-   - Inner dimensions: $D_{2 \times \mathbf{2}}$ and $A_{\mathbf{2} \times 3}$.
-   - Since $2 = 2$, the product is **defined**.
-   - **Size of $DA$:** $2 \times 3$.
+$$
+\begin{pmatrix}
+1 & 2 & \mid & 3 \\
+0 & 0 & \mid & 1 \\
+\end{pmatrix}
+$$
 
 ---
 
-#### Step 3. Summary of Results
+#### Step 3. Interpret the contradiction
+
+Convert the second row of the reduced matrix back into an algebraic equation:
 
 $$
-\begin{aligned}
-AB &: \text{Defined, size } 2 \times 4 \\
-BA &: \text{Undefined} \\
-BC &: \text{Defined, size } 3 \times 2 \\
-CB &: \text{Undefined} \\
-AC &: \text{Undefined} \\
-CA &: \text{Defined, size } 4 \times 3 \\
-AD &: \text{Undefined} \\
-DA &: \text{Defined, size } 2 \times 3
-\end{aligned}
+0x + 0y = 1 \implies 0 = 1
 $$
+
+This is a **false statement (contradiction)** because $0$ can never equal $1$, regardless of the values chosen for $x$ and $y$.
+
+---
+
+#### Step 4. Geometric interpretation and conclusion
+
+- **Algebraic Conclusion:** Because elimination leads directly to a row of the form $[0 \ 0 \ \dots \ 0 \mid c]$ with $c \neq 0$, the system has **no solution** (it is **inconsistent**).
+
+- **Geometric Interpretation:** The two equations represent parallel lines in $\mathbb{R}^2$:
+  - Line 1: $y = -\frac{1}{2}x + \frac{3}{2}$
+  - Line 2: $y = -\frac{1}{2}x + \frac{7}{4}$
+
+  Both lines have the exact same slope ($m = -\frac{1}{2}$) but different $y$-intercepts ($\frac{3}{2} \neq \frac{7}{4}$). Since parallel lines never intersect, there is no point $(x, y)$ that satisfies both equations simultaneously.
