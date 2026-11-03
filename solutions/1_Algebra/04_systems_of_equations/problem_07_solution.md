@@ -1,225 +1,76 @@
-### Exercise 7. Identity Matrix, Zero Matrix, and Powers
-
-For
-
-$$
-A = 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-$$
-
-compute $AI$, $IA$, $A + 0$, $A^2$, and $A^3$. Explain the roles of the matrices $I$ and $0$, and describe the pattern you observe in successive powers of $A$.
+### Exercise 7. Choosing a Method Deliberately
 
 ---
 
 ### Solution
 
-#### Step 1. Compute $AI$, $IA$, and $A + 0$
+#### Part 1. One system with a triangular coefficient matrix
 
-Let $I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ be the $2 \times 2$ identity matrix and $0 = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$ be the $2 \times 2$ zero matrix.
-
-- **Compute $AI$:**
+**Given System:**
 
 $$
-\begin{aligned}
-AI &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-\begin{pmatrix}
-1 & 0 \\
-0 & 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-(2)(1) + (1)(0) & (2)(0) + (1)(1) \\
-(0)(1) + (2)(0) & (0)(0) + (2)(1) \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-\end{aligned}
+\begin{cases}
+2x - y = 3, \\
+4y = 8.
+\end{cases}
 $$
 
-- **Compute $IA$:**
+**Chosen Method:** **Back-substitution** (Direct solution from triangular form).
+
+**Justification:** The coefficient matrix $A = \begin{pmatrix} 2 & -1 \\ 0 & 4 \end{pmatrix}$ is upper triangular. Forward elimination is already complete, making Gauss–Jordan elimination or matrix inversion redundant and inefficient.
+
+**Complete Computation:**
+
+1. **Solve for $y$ directly from row 2:**
+   $$
+   4y = 8 \implies y = \frac{8}{4} = 2
+   $$
+
+2. **Substitute $y = 2$ into row 1 to solve for $x$:**
+   $$
+   2x - (2) = 3 \implies 2x = 5 \implies x = \frac{5}{2}
+   $$
+
+**Final Solution Vector:**
 
 $$
-\begin{aligned}
-IA &= 
+x = 
 \begin{pmatrix}
-1 & 0 \\
-0 & 1 \\
+x \\
+y \\
 \end{pmatrix}
+=
 \begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-(1)(2) + (0)(0) & (1)(1) + (0)(2) \\
-(0)(2) + (1)(0) & (0)(1) + (1)(2) \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
+\frac{5}{2} \\
+2 \\
 \end{pmatrix}
-\end{aligned}
-$$
-
-- **Compute $A + 0$:**
-
-$$
-\begin{aligned}
-A + 0 &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-+
-\begin{pmatrix}
-0 & 0 \\
-0 & 0 \\
-\end{pmatrix} \\
-      &= 
-\begin{pmatrix}
-2 + 0 & 1 + 0 \\
-0 + 0 & 2 + 0 \\
-\end{pmatrix} \\
-      &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-\end{aligned}
 $$
 
 ---
 
-#### Step 2. Compute the matrix powers $A^2$ and $A^3$
+#### Part 2. Three systems $A x = b_i$ with the same matrix $A$ and known $A^{-1}$
 
-- **Compute $A^2 = A A$:**
+**Chosen Method:** **Direct Matrix-Vector Multiplication** ($x_i = A^{-1}b_i$).
 
-$$
-\begin{aligned}
-A^2 &= 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-(2)(2) + (1)(0) & (2)(1) + (1)(2) \\
-(0)(2) + (2)(0) & (0)(1) + (2)(2) \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-4 & 2 + 2 \\
-0 & 4 \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-4 & 4 \\
-0 & 4 \\
-\end{pmatrix}
-\end{aligned}
-$$
+**Plan & Strategy:**
+1. Compute each solution vector directly by evaluating $x_1 = A^{-1}b_1$, $x_2 = A^{-1}b_2$, and $x_3 = A^{-1}b_3$.
+2. Alternatively, pack the right-hand sides into a matrix $B = \begin{pmatrix} b_1 & b_2 & b_3 \end{pmatrix}$ and perform a single matrix-matrix product $X = A^{-1}B$.
 
-- **Compute $A^3 = A^2 A$:**
-
-$$
-\begin{aligned}
-A^3 &= 
-\begin{pmatrix}
-4 & 4 \\
-0 & 4 \\
-\end{pmatrix}
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-(4)(2) + (4)(0) & (4)(1) + (4)(2) \\
-(0)(2) + (4)(0) & (0)(1) + (4)(2) \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-8 & 4 + 8 \\
-0 & 8 \\
-\end{pmatrix} \\
-    &= 
-\begin{pmatrix}
-8 & 12 \\
-0 & 8 \\
-\end{pmatrix}
-\end{aligned}
-$$
+**Reusable vs. Unnecessary Computations:**
+- **Reusable:** The known inverse $A^{-1}$ is computed once and reused across all three right-hand sides.
+- **Unnecessary:** Performing Gaussian elimination three separate times on $[A \mid b_1]$, $[A \mid b_2]$, and $[A \mid b_3]$ is completely unnecessary, as it would redundantly reduce $A$ from scratch three times.
 
 ---
 
-#### Step 3. Explain the roles of $I$ and $0$
+#### Part 3. One $3 \times 3$ system where $A^{-1}$ is unknown and a single solution is needed
 
-1. **Role of $I$ (Multiplicative Identity):** 
-   The identity matrix $I$ acts like the real number $1$ under multiplication. For any square matrix $A$, multiplying by $I$ on either the left or the right leaves the matrix unchanged:
-   $$
-   AI = IA = A
-   $$
+**Chosen Method:** **Gaussian Elimination with Back-substitution** on $[A \mid b]$.
 
-2. **Role of $0$ (Additive Identity):** 
-   The zero matrix $0$ acts like the real number $0$ under addition. Adding $0$ to any matrix $A$ of the same size leaves the matrix unchanged:
-   $$
-   A + 0 = A
-   $$
+**Plan & Strategy:**
+1. Form the augmented matrix $[A \mid b]$.
+2. Perform row operations to reduce $[A \mid b]$ to row echelon form $[U \mid c]$.
+3. Use back-substitution to solve for the unknown vector $x$.
 
----
-
-#### Step 4. Describe the pattern observed in successive powers of $A$
-
-Writing out $A^1$, $A^2$, and $A^3$ side-by-side:
-
-$$
-A^1 = 
-\begin{pmatrix}
-2 & 1 \\
-0 & 2 \\
-\end{pmatrix}, \quad 
-A^2 = 
-\begin{pmatrix}
-4 & 4 \\
-0 & 4 \\
-\end{pmatrix}, \quad 
-A^3 = 
-\begin{pmatrix}
-8 & 12 \\
-0 & 8 \\
-\end{pmatrix}
-$$
-
-Rewriting the entries in terms of the power $n$:
-
-- **Main diagonal entries:** The diagonal elements are powers of $2$, specifically $2^n$.
-- **Bottom-left entry:** Remains $0$ for all powers (preserving the upper-triangular structure).
-- **Top-right entry:** The values are $1, 4, 12, \dots$, which follow the formula $n \cdot 2^{n-1}$:
-  - For $n=1$: $1 \cdot 2^{1-1} = 1 \cdot 1 = 1$
-  - For $n=2$: $2 \cdot 2^{2-1} = 2 \cdot 2 = 4$
-  - For $n=3$: $3 \cdot 2^{3-1} = 3 \cdot 4 = 12$
-
-Thus, the general pattern for the $n$-th power $A^n$ is:
-
-$$
-A^n = 
-\begin{pmatrix}
-2^n & n \cdot 2^{n-1} \\
-0 & 2^n \\
-\end{pmatrix}
-$$
+**Reusable vs. Unnecessary Computations:**
+- **Necessary Computation:** Reducing $[A \mid b]$ requires roughly $\frac{2}{3}n^3 = 18$ operations for a $3 \times 3$ system.
+- **Unnecessary Computation:** Computing $A^{-1}$ first is completely unnecessary. Inverting $A$ via $[A \mid I]$ takes $\approx 2n^3 = 54$ operations (three times as much work) plus an extra matrix-vector multiplication $A^{-1}b$. Finding $A^{-1}$ is wasteful when only a single right-hand side $b$ needs to be solved.
