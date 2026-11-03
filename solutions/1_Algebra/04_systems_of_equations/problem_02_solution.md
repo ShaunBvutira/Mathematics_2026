@@ -1,60 +1,112 @@
-### Exercise 1. From a System to a Matrix
+### Exercise 2. Gaussian Elimination — One Solution
 
-Write the system
+Solve using Gaussian elimination:
 
 $$
 \begin{cases}
-2x - y + z = 4, \\
-x + 3y - 2z = 1, \\
-3x + y + z = 7.
+x + y + z = 6, \\
+2x - y + z = 3, \\
+x + 2y - z = 2.
 \end{cases}
 $$
 
-in the form $Ax = b$. Identify the coefficient matrix, the vector of unknowns, and the right-hand side vector. Explain how each row of the matrix corresponds to one equation.
+After solving, substitute the result into all equations and check consistency.
 
 ---
 
 ### Solution
 
-#### Step 1. Express the system in matrix form $Ax = b$
+#### Step 1. Form the augmented matrix $[A \mid b]$
 
-Writing the system of linear equations as a matrix equation $Ax = b$:
+Write the linear system as an augmented matrix:
 
 $$
+[A \mid b] = 
 \begin{pmatrix}
-2 & -1 & 1 \\
-1 & 3 & -2 \\
-3 & 1 & 1 \\
-\end{pmatrix}
-\begin{pmatrix}
-x \\
-y \\
-z \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-4 \\
-1 \\
-7 \\
+1 & 1 & 1 & \mid & 6 \\
+2 & -1 & 1 & \mid & 3 \\
+1 & 2 & -1 & \mid & 2 \\
 \end{pmatrix}
 $$
 
 ---
 
-#### Step 2. Identify $A$, $x$, and $b$
+#### Step 2. Row reduce to upper triangular form (Row Echelon Form)
 
-- **Coefficient Matrix ($A$):** The $3 \times 3$ matrix containing the numerical coefficients of the variables:
+**Step 2.1:** Eliminate $x$ from the second and third rows using $R_1$.
+
+Perform $R_2 \leftarrow R_2 - 2 R_1$:
+
+- Row 2 calculation: $(2 - 2(1), -1 - 2(1), 1 - 2(1) \mid 3 - 2(6)) = (0, -3, -1 \mid -9)$
+
+Perform $R_3 \leftarrow R_3 - R_1$:
+
+- Row 3 calculation: $(1 - 1, 2 - 1, -1 - 1 \mid 2 - 6) = (0, 1, -2 \mid -4)$
+
+The augmented matrix becomes:
 
 $$
-A = 
 \begin{pmatrix}
-2 & -1 & 1 \\
-1 & 3 & -2 \\
-3 & 1 & 1 \\
+1 & 1 & 1 & \mid & 6 \\
+0 & -3 & -1 & \mid & -9 \\
+0 & 1 & -2 & \mid & -4 \\
 \end{pmatrix}
 $$
 
-- **Vector of Unknowns ($x$):** The $3 \times 1$ column vector containing the variables:
+---
+
+**Step 2.2:** Swap Row 2 and Row 3 to obtain a pivot of $1$ in column 2 ($R_2 \leftrightarrow R_3$).
+
+The augmented matrix becomes:
+
+$$
+\begin{pmatrix}
+1 & 1 & 1 & \mid & 6 \\
+0 & 1 & -2 & \mid & -4 \\
+0 & -3 & -1 & \mid & -9 \\
+\end{pmatrix}
+$$
+
+---
+
+**Step 2.3:** Eliminate $y$ from the third row using the new $R_2$.
+
+Perform $R_3 \leftarrow R_3 + 3 R_2$:
+
+- Row 3 calculation: $(0 + 3(0), -3 + 3(1), -1 + 3(-2) \mid -9 + 3(-4)) = (0, 0, -7 \mid -21)$
+
+The matrix is now in row echelon form:
+
+$$
+\begin{pmatrix}
+1 & 1 & 1 & \mid & 6 \\
+0 & 1 & -2 & \mid & -4 \\
+0 & 0 & -7 & \mid & -21 \\
+\end{pmatrix}
+$$
+
+---
+
+#### Step 3. Back-substitution
+
+Convert the upper triangular system back into equations:
+
+1. **Third equation:**
+   $$
+   -7z = -21 \implies z = \frac{-21}{-7} = 3
+   $$
+
+2. **Second equation:**
+   $$
+   y - 2z = -4 \implies y - 2(3) = -4 \implies y - 6 = -4 \implies y = 2
+   $$
+
+3. **First equation:**
+   $$
+   x + y + z = 6 \implies x + 2 + 3 = 6 \implies x + 5 = 6 \implies x = 1
+   $$
+
+Thus, the unique solution vector is:
 
 $$
 x = 
@@ -63,27 +115,33 @@ x \\
 y \\
 z \\
 \end{pmatrix}
-$$
-
-- **Right-Hand Side Vector ($b$):** The $3 \times 1$ column vector containing the constant terms:
-
-$$
-b = 
+=
 \begin{pmatrix}
-4 \\
 1 \\
-7 \\
+2 \\
+3 \\
 \end{pmatrix}
 $$
 
 ---
 
-#### Step 3. Explain how each row corresponds to one equation
+#### Step 4. Check consistency by substitution
 
-By the definition of matrix-vector multiplication, computing row $i$ of the product $Ax$ takes the dot product of the $i$-th row vector of $A$ with the variable vector $x$:
+Substitute $x = 1$, $y = 2$, and $z = 3$ back into all three original equations:
 
-- **Row 1:** $(2, -1, 1) \cdot (x, y, z)^T = 2x - y + z = 4$ (first equation)
-- **Row 2:** $(1, 3, -2) \cdot (x, y, z)^T = x + 3y - 2z = 1$ (second equation)
-- **Row 3:** $(3, 1, 1) \cdot (x, y, z)^T = 3x + y + z = 7$ (third equation)
+1. **Equation 1:**
+   $$
+   1 + 2 + 3 = 6 \quad \checkmark \quad (6 = 6)
+   $$
 
-Thus, each row of the coefficient matrix $A$ holds the exact coefficients for the variables in the corresponding linear equation, while the matching row entry in $b$ provides the equation's constant target value.
+2. **Equation 2:**
+   $$
+   2(1) - 2 + 3 = 2 - 2 + 3 = 3 \quad \checkmark \quad (3 = 3)
+   $$
+
+3. **Equation 3:**
+   $$
+   1 + 2(2) - 3 = 1 + 4 - 3 = 2 \quad \checkmark \quad (2 = 2)
+   $$
+
+All three equations are satisfied, confirming the solution is correct and consistent.
