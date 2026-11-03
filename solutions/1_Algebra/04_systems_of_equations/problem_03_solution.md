@@ -1,4 +1,4 @@
-### Exercise 3. Inconsistent System
+### Exercise 3. Inconsistent Systems
 
 Solve or show that the system is inconsistent:
 
