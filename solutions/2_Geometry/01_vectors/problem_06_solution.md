@@ -1,19 +1,70 @@
-## Question
+### Exercise 6. Projection and Perpendicular Component
 
-Project $u=(4,2)$ onto $v=(1,1)$, compute the residual $r$, verify $r\cdot v=0$, and explain the result geometrically.
+Given $u = (4, 2)^T$ and $v = (1, 1)^T$:
 
-## Solution
+1. Find the projection of $u$ onto $v$ ($\mathrm{proj}_v u$).
+2. Compute the residual vector $r = u - \mathrm{proj}_v u$.
+3. Verify that $r \cdot v = 0$ and explain the result geometrically.
 
-Using the projection formula,
+---
 
-$$\operatorname{proj}_v u=\frac{u\cdot v}{v\cdot v}v=\frac{6}{2}(1,1)=(3,3).$$
+### Solution
 
-Thus
+#### Step 1. Compute the orthogonal projection $\mathrm{proj}_v u$
 
-$$r=u-\operatorname{proj}_v u=(4,2)-(3,3)=(1,-1),$$
+The vector projection of $u$ onto $v$ is given by the formula:
 
-and the requested calculation is
+$$
+\mathrm{proj}_v u = \left( \frac{u \cdot v}{\|v\|^2} \right) v
+$$
 
-$$r\cdot v=(1,-1)\cdot(1,1)=1-1=0.$$
+1. **Compute dot product $u \cdot v$:**
+   $$
+   u \cdot v = (4)(1) + (2)(1) = 4 + 2 = 6
+   $$
 
-The projection $(3,3)$ is parallel to $v$, so it is the component of $u$ in the projection direction. Subtracting this parallel component leaves the perpendicular component $r$. The zero dot product verifies geometrically that $r$ is perpendicular to the direction $v$.
+2. **Compute $\|v\|^2$:**
+   $$
+   \|v\|^2 = 1^2 + 1^2 = 1 + 1 = 2
+   $$
+
+3. **Calculate $\mathrm{proj}_v u$:**
+   $$
+   \mathrm{proj}_v u = \left( \frac{6}{2} \right) \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 3 \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 3 \\ 3 \end{pmatrix}
+   $$
+
+---
+
+#### Step 2. Compute the residual vector $r = u - \mathrm{proj}_v u$
+
+Subtract the projection vector from $u$:
+
+$$
+r = u - \mathrm{proj}_v u = \begin{pmatrix} 4 \\ 2 \end{pmatrix} - \begin{pmatrix} 3 \\ 3 \end{pmatrix} = \begin{pmatrix} 4 - 3 \\ 2 - 3 \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}
+$$
+
+---
+
+#### Step 3. Verify $r \cdot v = 0$
+
+Compute the dot product of $r$ and $v$:
+
+$$
+r \cdot v = (1)(1) + (-1)(1) = 1 - 1 = 0
+$$
+
+Since $r \cdot v = 0$, the vector $r$ is orthogonal to $v$.
+
+---
+
+#### Step 4. Geometric Explanation
+
+This result reflects the fundamental **orthogonal decomposition** of vector $u$ with respect to vector $v$:
+
+$$
+u = \mathrm{proj}_v u + r
+$$
+
+1. **Parallel Component ($\mathrm{proj}_v u$):** The projection vector $(3, 3)^T$ represents the component of $u$ that lies directly along the line defined by $v$. It is the shadow cast by $u$ onto the span of $v$.
+2. **Perpendicular Component ($r$):** The residual vector $(1, -1)^T$ represents the component of $u$ that is strictly perpendicular (orthogonal) to $v$.
+3. **Right Triangle:** The three vectors $u$, $\mathrm{proj}_v u$, and $r$ form a right-angled triangle where $u$ acts as the hypotenuse, $\mathrm{proj}_v u$ is the base along $v$, and $r$ is the altitude connecting the tip of $\mathrm{proj}_v u$ perpendicularly to the tip of $u$.
