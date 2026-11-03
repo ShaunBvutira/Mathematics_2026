@@ -1,128 +1,176 @@
-### Exercise 4. Matrix Multiplication and Noncommutativity
+### Exercise 4. Infinitely Many Solutions
 
-For
+Solve
 
 $$
-A = 
-\begin{pmatrix}
-1 & 2 \\
-0 & 1 \\
-\end{pmatrix}, \quad 
-B = 
-\begin{pmatrix}
-2 & 0 \\
-3 & 1 \\
-\end{pmatrix}
+\begin{cases}
+x + y + z = 2, \\
+2x + 2y + 2z = 4, \\
+x - y + z = 0.
+\end{cases}
 $$
 
-compute $AB$ and $BA$. Is $AB = BA$? Use this example to explain what noncommutativity of matrix multiplication means.
+Give the solution in parametric form, identify a free variable, and for one chosen parameter value check that the resulting point really satisfies the system.
 
 ---
 
 ### Solution
 
-#### Step 1. Compute $AB$
+#### Step 1. Form the augmented matrix $[A \mid b]$
 
-Multiply matrix $A$ by matrix $B$:
+Write the linear system in augmented matrix form:
 
 $$
-\begin{aligned}
-AB &= 
+[A \mid b] = 
 \begin{pmatrix}
-1 & 2 \\
-0 & 1 \\
+1 & 1 & 1 & \mid & 2 \\
+2 & 2 & 2 & \mid & 4 \\
+1 & -1 & 1 & \mid & 0 \\
 \end{pmatrix}
-\begin{pmatrix}
-2 & 0 \\
-3 & 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-(1)(2) + (2)(3) & (1)(0) + (2)(1) \\
-(0)(2) + (1)(3) & (0)(0) + (1)(1) \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-2 + 6 & 0 + 2 \\
-0 + 3 & 0 + 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-8 & 2 \\
-3 & 1 \\
-\end{pmatrix}
-\end{aligned}
 $$
 
 ---
 
-#### Step 2. Compute $BA$
+#### Step 2. Perform Gaussian elimination
 
-Multiply matrix $B$ by matrix $A$:
+**Step 2.1:** Eliminate $x$ from the second and third rows using $R_1$.
+
+Perform $R_2 \leftarrow R_2 - 2 R_1$:
+
+- Row 2 calculation: $(2 - 2(1), 2 - 2(1), 2 - 2(1) \mid 4 - 2(2)) = (0, 0, 0 \mid 0)$
+
+Perform $R_3 \leftarrow R_3 - R_1$:
+
+- Row 3 calculation: $(1 - 1, -1 - 1, 1 - 1 \mid 0 - 2) = (0, -2, 0 \mid -2)$
+
+The augmented matrix becomes:
 
 $$
-\begin{aligned}
-BA &= 
 \begin{pmatrix}
-2 & 0 \\
-3 & 1 \\
+1 & 1 & 1 & \mid & 2 \\
+0 & 0 & 0 & \mid & 0 \\
+0 & -2 & 0 & \mid & -2 \\
 \end{pmatrix}
-\begin{pmatrix}
-1 & 2 \\
-0 & 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-(2)(1) + (0)(0) & (2)(2) + (0)(1) \\
-(3)(1) + (1)(0) & (3)(2) + (1)(1) \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-2 + 0 & 4 + 0 \\
-3 + 0 & 6 + 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-2 & 4 \\
-3 & 7 \\
-\end{pmatrix}
-\end{aligned}
 $$
 
 ---
 
-#### Step 3. Compare $AB$ and $BA$
-
-Comparing the two resulting matrices entry by entry:
+**Step 2.2:** Swap Row 2 and Row 3 to bring the non-zero row up ($R_2 \leftrightarrow R_3$):
 
 $$
-AB = 
 \begin{pmatrix}
-8 & 2 \\
-3 & 1 \\
+1 & 1 & 1 & \mid & 2 \\
+0 & -2 & 0 & \mid & -2 \\
+0 & 0 & 0 & \mid & 0 \\
 \end{pmatrix}
-\neq
-\begin{pmatrix}
-2 & 4 \\
-3 & 7 \\
-\end{pmatrix}
-= BA
 $$
-
-Therefore, $AB \neq BA$.
 
 ---
 
-#### Step 4. Explain noncommutativity of matrix multiplication
-
-In ordinary real-number arithmetic, multiplication is **commutative** ($ab = ba$ for all numbers $a$ and $b$).
-
-However, matrix multiplication is generally **non-commutative**. This means that changing the order of the matrices in a product usually changes the final result:
+**Step 2.3:** Scale Row 2 by multiplying by $-\frac{1}{2}$ ($R_2 \leftarrow -\frac{1}{2} R_2$):
 
 $$
-AB \neq BA
+\begin{pmatrix}
+1 & 1 & 1 & \mid & 2 \\
+0 & 1 & 0 & \mid & 1 \\
+0 & 0 & 0 & \mid & 0 \\
+\end{pmatrix}
 $$
 
-**Why this happens:**
-1. **Row-by-Column Combinations:** Entry $(i, j)$ of $AB$ is the dot product of the $i$-th row of $A$ and the $j$-th column of $B$. When the order is reversed to $BA$, entry $(i, j)$ becomes the dot product of the $i$-th row of $B$ and the $j$-th column of $A$, combining completely different numerical components.
-2. **Order of Transformations:** Geometrically, matrix multiplication represents sequential transformations. The matrix $AB$ represents applying transformation $B$ first, followed by transformation $A$. In contrast, $BA$ represents applying transformation $A$ first, followed by transformation $B$. In geometry, applying linear actions in a different order leads to different final states.
+---
+
+#### Step 3. Identify basic and free variables
+
+Convert the non-zero rows back to algebraic equations:
+
+1. **Second row:**
+   $$
+   y = 1
+   $$
+
+2. **First row:**
+   $$
+   x + y + z = 2
+   $$
+
+The pivot columns are column 1 (for $x$) and column 2 (for $y$). Column 3 (for $z$) has no pivot. 
+
+- **Basic variables:** $x, y$
+- **Free variable:** $z$
+
+---
+
+#### Step 4. Express the solution in parametric form
+
+Let $z = t$, where $t \in \mathbb{R}$ is a free parameter.
+
+Substitute $y = 1$ and $z = t$ into the first equation to solve for $x$:
+
+$$
+x + 1 + t = 2 \implies x = 1 - t
+$$
+
+Thus, the parametric solution is:
+
+$$
+\begin{cases}
+x = 1 - t, \\
+y = 1, \\
+z = t,
+\end{cases}
+\quad t \in \mathbb{R}
+$$
+
+Or in vector form:
+
+$$
+\begin{pmatrix}
+x \\
+y \\
+z \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 \\
+1 \\
+0 \\
+\end{pmatrix}
++ t
+\begin{pmatrix}
+-1 \\
+0 \\
+1 \\
+\end{pmatrix},
+\quad t \in \mathbb{R}
+$$
+
+---
+
+#### Step 5. Check a specific point for a chosen parameter value
+
+Choose parameter value $t = 2$:
+
+- $x = 1 - 2 = -1$
+- $y = 1$
+- $z = 2$
+
+Point to verify: $(x, y, z) = (-1, 1, 2)$.
+
+Substitute into all three original equations:
+
+1. **Equation 1 ($x + y + z = 2$):**
+   $$
+   -1 + 1 + 2 = 2 \quad \checkmark \quad (2 = 2)
+   $$
+
+2. **Equation 2 ($2x + 2y + 2z = 4$):**
+   $$
+   2(-1) + 2(1) + 2(2) = -2 + 2 + 4 = 4 \quad \checkmark \quad (4 = 4)
+   $$
+
+3. **Equation 3 ($x - y + z = 0$):**
+   $$
+   -1 - 1 + 2 = 0 \quad \checkmark \quad (0 = 0)
+   $$
+
+All three equations hold true, confirming the parametric solution is correct.
