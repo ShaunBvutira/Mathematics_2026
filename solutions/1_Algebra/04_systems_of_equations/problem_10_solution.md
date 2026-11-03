@@ -1,175 +1,108 @@
-### Exercise 10. Columns of a Matrix Product
+### Exercise 10. A Polynomial Through Three Points
 
-Given
-
-$$
-A = 
-\begin{pmatrix}
-1 & 2 & 0 \\
-0 & 1 & 1 \\
-\end{pmatrix}, \quad 
-B = 
-\begin{pmatrix}
-1 & 2 \\
--1 & 0 \\
-3 & 1 \\
-\end{pmatrix}.
-$$
-
-Denote the columns of $B$ by $b_1, b_2$.
-
-1. Compute $Ab_1$ and $Ab_2$.
-2. Compute the matrix $AB$.
-3. Compare the results and explain why the columns of $AB$ are exactly the vectors $Ab_1$ and $Ab_2$.
+Find a polynomial $p(x) = ax^2 + bx + c$ whose graph passes through $(0, 1)$, $(1, 3)$, and $(2, 9)$. Reduce the problem to a system of equations and check the result by substituting all three points.
 
 ---
 
 ### Solution
 
-#### Step 1. Compute $Ab_1$ and $Ab_2$
+#### Step 1. Form the system of linear equations
 
-The columns of matrix $B$ are:
+For the graph of $p(x) = ax^2 + bx + c$ to pass through a given point $(x_0, y_0)$, the condition $p(x_0) = y_0$ must hold:
 
-$$
-b_1 = 
-\begin{pmatrix}
-1 \\
--1 \\
-3 \\
-\end{pmatrix}, \quad 
-b_2 = 
-\begin{pmatrix}
-2 \\
-0 \\
-1 \\
-\end{pmatrix}
-$$
+1. **Point $(0, 1)$:**
+   $$
+   p(0) = a(0)^2 + b(0) + c = 1 \implies c = 1
+   $$
 
-- **Compute $Ab_1$:**
+2. **Point $(1, 3)$:**
+   $$
+   p(1) = a(1)^2 + b(1) + c = 3 \implies a + b + c = 3
+   $$
 
-$$
-\begin{aligned}
-Ab_1 &= 
-\begin{pmatrix}
-1 & 2 & 0 \\
-0 & 1 & 1 \\
-\end{pmatrix}
-\begin{pmatrix}
-1 \\
--1 \\
-3 \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
-(1)(1) + (2)(-1) + (0)(3) \\
-(0)(1) + (1)(-1) + (1)(3) \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
-1 - 2 + 0 \\
-0 - 1 + 3 \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
--1 \\
-2 \\
-\end{pmatrix}
-\end{aligned}
-$$
+3. **Point $(2, 9)$:**
+   $$
+   p(2) = a(2)^2 + b(2) + c = 9 \implies 4a + 2b + c = 9
+   $$
 
-- **Compute $Ab_2$:**
+This yields the following system of linear equations in unknowns $a, b, c$:
 
 $$
-\begin{aligned}
-Ab_2 &= 
-\begin{pmatrix}
-1 & 2 & 0 \\
-0 & 1 & 1 \\
-\end{pmatrix}
-\begin{pmatrix}
-2 \\
-0 \\
-1 \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
-(1)(2) + (2)(0) + (0)(1) \\
-(0)(2) + (1)(0) + (1)(1) \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
-2 + 0 + 0 \\
-0 + 0 + 1 \\
-\end{pmatrix} \\
-     &= 
-\begin{pmatrix}
-2 \\
-1 \\
-\end{pmatrix}
-\end{aligned}
+\begin{cases}
+c = 1, \\
+a + b + c = 3, \\
+4a + 2b + c = 9.
+\end{cases}
 $$
 
 ---
 
-#### Step 2. Compute the matrix $AB$
+#### Step 2. Solve the system by elimination / substitution
 
-Multiply matrix $A$ ($2 \times 3$) by matrix $B$ ($3 \times 2$) to get a $2 \times 2$ matrix:
+Substitute $c = 1$ into the second and third equations:
+
+1. **Second equation:**
+   $$
+   a + b + 1 = 3 \implies a + b = 2
+   $$
+
+2. **Third equation:**
+   $$
+   4a + 2b + 1 = 9 \implies 4a + 2b = 8 \implies 2a + b = 4
+   $$
+
+Now solve the $2 \times 2$ reduced system:
 
 $$
-\begin{aligned}
-AB &= 
-\begin{pmatrix}
-1 & 2 & 0 \\
-0 & 1 & 1 \\
-\end{pmatrix}
-\begin{pmatrix}
-1 & 2 \\
--1 & 0 \\
-3 & 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-(1)(1) + (2)(-1) + (0)(3) & (1)(2) + (2)(0) + (0)(1) \\
-(0)(1) + (1)(-1) + (1)(3) & (0)(2) + (1)(0) + (1)(1) \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
-1 - 2 + 0 & 2 + 0 + 0 \\
-0 - 1 + 3 & 0 + 0 + 1 \\
-\end{pmatrix} \\
-   &= 
-\begin{pmatrix}
--1 & 2 \\
-2 & 1 \\
-\end{pmatrix}
-\end{aligned}
+\begin{cases}
+a + b = 2, \\
+2a + b = 4.
+\end{cases}
+$$
+
+Subtract the first equation from the second equation:
+
+$$
+(2a + b) - (a + b) = 4 - 2 \implies a = 2
+$$
+
+Substitute $a = 2$ back into $a + b = 2$:
+
+$$
+2 + b = 2 \implies b = 0
+$$
+
+Thus, the coefficients are:
+
+$$
+a = 2, \quad b = 0, \quad c = 1
+$$
+
+The required quadratic polynomial is:
+
+$$
+p(x) = 2x^2 + 1
 $$
 
 ---
 
-#### Step 3. Compare the results and explain the column-by-column property
+#### Step 3. Check consistency by evaluating all three points
 
-- **Comparison:**
-  The first column of $AB$ is $\begin{pmatrix} -1 \\ 2 \end{pmatrix}$, which matches $Ab_1$.
-  The second column of $AB$ is $\begin{pmatrix} 2 \\ 1 \end{pmatrix}$, which matches $Ab_2$.
+Substitute $x = 0, 1, 2$ into $p(x) = 2x^2 + 1$:
 
-  Therefore:
+1. **Check $(0, 1)$:**
+   $$
+   p(0) = 2(0)^2 + 1 = 0 + 1 = 1 \quad \checkmark \quad (\text{matches } y = 1)
+   $$
 
-$$
-AB = \begin{pmatrix} Ab_1 & Ab_2 \end{pmatrix} = 
-\begin{pmatrix}
--1 & 2 \\
-2 & 1 \\
-\end{pmatrix}
-$$
+2. **Check $(1, 3)$:**
+   $$
+   p(1) = 2(1)^2 + 1 = 2(1) + 1 = 3 \quad \checkmark \quad (\text{matches } y = 3)
+   $$
 
-- **Explanation:**
-  By the **column definition of matrix multiplication**, multiplying matrix $A$ by matrix $B = \begin{pmatrix} b_1 & b_2 \end{pmatrix}$ applies the linear transformation represented by $A$ independently to each column vector of $B$. 
+3. **Check $(2, 9)$:**
+   $$
+   p(2) = 2(2)^2 + 1 = 2(4) + 1 = 9 \quad \checkmark \quad (\text{matches } y = 9)
+   $$
 
-  Specifically, column $j$ of the product $AB$ is formed by multiplying matrix $A$ by the $j$-th column vector of $B$:
-
-$$
-A \begin{pmatrix} b_1 & b_2 & \dots & b_k \end{pmatrix} = \begin{pmatrix} Ab_1 & Ab_2 & \dots & Ab_k \end{pmatrix}
-$$
-
-  Because each column $b_j$ acts independently as an input vector to $A$, the resulting matrix $AB$ collects the transformed column vectors $Ab_j$ side by side.
+All three points satisfy $p(x) = 2x^2 + 1$, confirming the polynomial is correct.
