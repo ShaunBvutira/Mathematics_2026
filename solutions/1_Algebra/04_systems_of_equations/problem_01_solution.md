@@ -1,67 +1,89 @@
-### Exercise 1. Matrix Size and Entries
+### Exercise 1. From a System to a Matrix
 
-Given
+Write the system
 
 $$
-A = 
-\begin{pmatrix}
-2 & -1 & 3 \\
-0 & 4 & 5 \\
-\end{pmatrix}, \quad 
-B = 
-\begin{pmatrix}
-1 & 0 \\
--2 & 3 \\
-4 & 1 \\
-\end{pmatrix}.
+\begin{cases}
+2x - y + z = 4, \\
+x + 3y - 2z = 1, \\
+3x + y + z = 7.
+\end{cases}
 $$
 
-1. State the sizes of matrices $A$ and $B$.
-2. Read off the entries $a_{12}$, $a_{23}$, $b_{21}$, and $b_{32}$.
-3. Write the second row of $A$ and the first column of $B$ as vectors.
+in the form $Ax = b$. Identify the coefficient matrix, the vector of unknowns, and the right-hand side vector. Explain how each row of the matrix corresponds to one equation.
 
 ---
 
 ### Solution
 
-#### Step 1. State the sizes of matrices A and B
+#### Step 1. Express the system in matrix form $Ax = b$
 
-The size (or dimension) of a matrix is written as $m \times n$, where $m$ is the number of rows and $n$ is the number of columns.
-
-- Matrix $A$ has $2$ rows and $3$ columns, so its size is $2 \times 3$.
-- Matrix $B$ has $3$ rows and $2$ columns, so its size is $3 \times 2$.
-
----
-
-#### Step 2. Read off the specified entries
-
-The notation $m_{ij}$ denotes the entry located in row $i$ and column $j$ of matrix $M$.
-
-- Entry $a_{12}$ (row 1, column 2 of $A$): $-1$
-- Entry $a_{23}$ (row 2, column 3 of $A$): $5$
-- Entry $b_{21}$ (row 2, column 1 of $B$): $-2$
-- Entry $b_{32}$ (row 3, column 2 of $B$): $1$
-
----
-
-#### Step 3. Write specified row and column as vectors
-
-- The **second row of matrix $A$** as a row vector:
+Writing the system of linear equations as a matrix equation $Ax = b$:
 
 $$
-r_2(A) = 
 \begin{pmatrix}
-0 & 4 & 5 \\
+2 & -1 & 1 \\
+1 & 3 & -2 \\
+3 & 1 & 1 \\
 \end{pmatrix}
-$$
-
-- The **first column of matrix $B$** as a column vector:
-
-$$
-c_1(B) = 
 \begin{pmatrix}
-1 \\
--2 \\
+x \\
+y \\
+z \\
+\end{pmatrix}
+=
+\begin{pmatrix}
 4 \\
+1 \\
+7 \\
 \end{pmatrix}
 $$
+
+---
+
+#### Step 2. Identify $A$, $x$, and $b$
+
+- **Coefficient Matrix ($A$):** The $3 \times 3$ matrix containing the numerical coefficients of the variables:
+
+$$
+A = 
+\begin{pmatrix}
+2 & -1 & 1 \\
+1 & 3 & -2 \\
+3 & 1 & 1 \\
+\end{pmatrix}
+$$
+
+- **Vector of Unknowns ($x$):** The $3 \times 1$ column vector containing the variables:
+
+$$
+x = 
+\begin{pmatrix}
+x \\
+y \\
+z \\
+\end{pmatrix}
+$$
+
+- **Right-Hand Side Vector ($b$):** The $3 \times 1$ column vector containing the constant terms:
+
+$$
+b = 
+\begin{pmatrix}
+4 \\
+1 \\
+7 \\
+\end{pmatrix}
+$$
+
+---
+
+#### Step 3. Explain how each row corresponds to one equation
+
+By the definition of matrix-vector multiplication, computing row $i$ of the product $Ax$ takes the dot product of the $i$-th row vector of $A$ with the variable vector $x$:
+
+- **Row 1:** $(2, -1, 1) \cdot (x, y, z)^T = 2x - y + z = 4$ (first equation)
+- **Row 2:** $(1, 3, -2) \cdot (x, y, z)^T = x + 3y - 2z = 1$ (second equation)
+- **Row 3:** $(3, 1, 1) \cdot (x, y, z)^T = 3x + y + z = 7$ (third equation)
+
+Thus, each row of the coefficient matrix $A$ holds the exact coefficients for the variables in the corresponding linear equation, while the matching row entry in $b$ provides the equation's constant target value.
